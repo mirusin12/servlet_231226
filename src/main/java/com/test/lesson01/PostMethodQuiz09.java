@@ -26,5 +26,6 @@ public class PostMethodQuiz09 extends HttpServlet {
 		out.print("<h3><b>지원 내용</b></h3><br>" + selfIntroduce);
 		out.print("</body></html>");
 		
+		// 깃허브 테스트용 주석
 	}
 }
