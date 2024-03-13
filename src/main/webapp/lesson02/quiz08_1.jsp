@@ -62,37 +62,26 @@
 		    list.add(map);
 		    
 		    // quiz08.jsp에서 보낸 id 불러오기
-		    Object rqId = request.getParameter("id");
-	    	Object image = list.get(0).get("image");
-	    	Object title = list.get(0).get("title");
-	    	Object id1 = list.get(0).get("id");
-	    	Object id2 = list.get(1).get("id");
-	    	Object id3 = list.get(2).get("id");
-	    	Object id4 = list.get(3).get("id");
-	    	
-
-		    for (int i = 0; i < list.size(); i++) {
-		    	out.print(rqId);
-		    	// out.print(list.get(i).get("id") + "<br>");
-		    	// out.print(rqId.equals(list.get(i).get("id")) + "<br>");
-		    	out.print(rqId == list.get(i).get("id"));
-			}
-	    	/*
-		    for (int i = 0; i < list.size(); i++) {
-		    	Object id = list.get(i).get("id");
-		    	if (rqId.equals(id)) {
-			    	image = list.get(i).get("image");
-			    	title = list.get(i).get("title");
-				}
-			}
-	    	*/
+		    int rqId = Integer.parseInt(request.getParameter("id"));
+		    
+		    // 책 정보 출력을 위해 map으로 저장
+		    Map<String, Object> target = new HashMap<>(); // {}
+		    for (Map<String, Object> book : list) {
+		    	if ((int)book.get("id") == rqId) {
+		    		target = book;
+		    		break;
+		    	}
+		    }
 		%>
-		<!-- 
-		<div>
-			<img src="<%= image %>" alt="책이미지" width=200 height=300>
-			<h1 class="text-bold">코스모스</h1>
+		
+		<div class="d-flex">
+			<img src="<%= target.get("image") %>" alt="책이미지" width=200 height=300>
+			<div class="ml-2">
+				<div class="display-1 font-weight-bold">코스모스</div>
+				<div class="display-3 text-info"><%= target.get("author") %></div>
+				<div class="display-4 text-danger"><%= target.get("publisher") %></div>
+			</div>
 		</div>
-		 -->
 		
 		
 		
