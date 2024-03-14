@@ -10,10 +10,12 @@
 
 <%-- 검색 --%>
 <div class="col-10">
-	<div class="input-group">
-		<input type="text" class="form-control col-6">
-		<div class="input-group-append">
-			<button class="btn btn-info" type="button">검색</button>
-		</div>
-	</div>
+		<form method="get" action="/lesson03/quiz02/info.jsp">
+			<div class="input-group">
+				<input type="text" class="form-control col-6" name="search">
+				<div class="input-group-append">
+						<button class="btn btn-info" type="submit">검색</button>
+				</div>
+			</div>
+		</form>
 </div>

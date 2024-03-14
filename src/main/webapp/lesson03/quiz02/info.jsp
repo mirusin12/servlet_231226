@@ -81,23 +81,43 @@
 		musicInfo.put("composer", "아이유,이종훈,이채규");
 		musicInfo.put("lyricist", "아이유");
 		musicList.add(musicInfo);
-		Object id = request.getParameter("id");
+		
 		Map<String, Object> result = new HashMap<>();
-		for (Map<String, Object> music : musicList) {
+		
+		// // 2. 검색으로 페이지 변경될 경우
+		if (request.getParameter("search") != null) {
+			String search = request.getParameter("search");
+			for (Map<String, Object> music : musicList) {
+				String title = music.get("title").toString();
+				if (search.equals(title)) {
+					result = music;
+					break;
+				}
+			}
 			
+		} else { // 1. a태그로 페이지 변경될 경우
+			String id = request.getParameter("id").toString();
+			for (Map<String, Object> music : musicList) {
+				String rqid = music.get("id").toString();
+				if (id.equals(rqid)) {
+					result = music;
+					break;
+				}
+			}
+
 		}
 %>
+
 <div>
 	<h4>곡 정보</h4>
-	<h1><%= id %></h1>
 	<%-- 곡 정보 --%>
 	<div class="border border-success p-3 d-flex">
-		<div>
-			<img src="" alt="앨범 자켓" width="150">	
+		<div class="mr-3">
+			<img src="<%= result.get("thumbnail") %>" alt="앨범 자켓" width="150" height="200">	
 		</div>
 		<div>
-			<div class="display-4">삐삐</div>
-			<div class="text-success font-weight-bold">아이유</div>
+			<div class="display-4"><%= result.get("title") %></div>
+			<div class="text-success font-weight-bold"><%= result.get("singer") %></div>
 			<div class="d-flex text-secondary">
 				<div class="mr-4">
 					<div>앨범</div>
@@ -106,10 +126,10 @@
 					<div>작사가</div>
 				</div>
 				<div>
-					<div>1</div>
-					<div></div>
-					<div></div>
-					<div></div>
+					<div><%= result.get("album") %></div>
+					<div><%= (int)result.get("time") / 60 %> : <%= (int)result.get("time") % 60 %></div>
+					<div><%= result.get("composer") %></div>
+					<div><%= result.get("lyricist") %></div>
 				</div>
 			</div>
 		</div>
