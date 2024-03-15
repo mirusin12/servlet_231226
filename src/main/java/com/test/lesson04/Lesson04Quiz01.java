@@ -36,7 +36,7 @@ public class Lesson04Quiz01 extends HttpServlet {
 		}
 		// 쿼리문 수행 (select) & 결과 출력
 		String selectQuery = "select * from `real_estate` "
-				+ "order by `id` asc "
+				+ "order by `id` desc "
 				+ "limit 10;";
 		PrintWriter out = response.getWriter();
 
