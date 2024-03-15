@@ -97,18 +97,27 @@
 			
 		} else { // 1. a태그로 페이지 변경될 경우
 			String id = request.getParameter("id").toString();
+			int idNum = Integer.parseInt(request.getParameter("id"));
 			for (Map<String, Object> music : musicList) {
+				if (idNum == (int)music.get("id")) {
+					result = music;
+					break;
+				}
+				/*
 				String rqid = music.get("id").toString();
 				if (id.equals(rqid)) {
 					result = music;
 					break;
 				}
+				*/
 			}
-
 		}
 %>
 
 <div>
+	<%
+		if (result != null) {
+	%>
 	<h4>곡 정보</h4>
 	<%-- 곡 정보 --%>
 	<div class="border border-success p-3 d-flex">
@@ -138,6 +147,13 @@
 	<h4 class="mt-4">가사</h4>
 	<hr>
 	<div>가사 정보 없음</div>
+	<%
+		} else {
+	%>
+	<h2>검색한 곡 정보가 없습니다.</h2>
+	<%
+		}	
+	%>
 	
 	
 </div>
